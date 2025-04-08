@@ -27,3 +27,17 @@ select * from zhaohua_liu_flink_test.student_info;
 -- {"info":{"id":126,"name":"李四"},"school":"南京小学","ds":"20250406","ts":1743900168054}
 -- {"info":{"id":127,"name":"王五"},"school":"长安小学","ds":"20250407","ts":1743900192051}
 -- {"info":{"id":127,"name":"赵六"},"school":"北京小学","ds":"20250407","ts":1743900213063}
+
+
+create external table if not exists zhaohua_liu_flink_test.student_info_minio(
+        id int,
+        name string,
+        school string,
+        ts bigint,
+        ds string
+)
+    row format delimited fields terminated by ","
+    location "s3a://bucket-test-v1/";
+
+select * from zhaohua_liu_flink_test.student_info_minio;
+
